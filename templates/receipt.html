@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Receipt</title>
+    <link data-n-head="1" rel="icon" type="image/x-icon" href="https://delhivery.com/favicon.png">
+    <style>
+        body {
+            font-family: "Open Sans", Arial, sans-serif;
+            line-height: 1.5;
+            font-size: 16px;
+            color: #333;
+            
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 80%;
+            background-color: #f9f9f9; /* Card color */
+            border-radius: 10px;
+            box-shadow: -2px 10px 20px -1px rgba(237, 60, 173, 0.4);
+            padding: 40px;
+            box-sizing: border-box;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #000000; /* Changed color to black */
+        }
+
+        p {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        strong {
+            color: #000000; /* Changed color to black */
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            background-color: #ED3237; /* Changed button color to match the theme */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #FF4D4D; /* Changed hover color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Booking Receipt</h1>
+        <p><strong>Tracking ID:</strong> {{ tracking_id }}</p>
+        <p><strong>Sender's Name:</strong> {{ sender_name }}</p>
+        <p><strong>Receiver's Name:</strong> {{ receiver_name }}</p>
+        <p><strong>Pickup Address:</strong> {{ pickup_address }}</p>
+        <p><strong>Delivery Address:</strong> {{ delivery_address }}</p>
+        <p><strong>Package Description:</strong> {{ package_description }}</p>
+
+        <div class="buttons">
+            <button class="button" onclick="downloadReceipt()">Download Receipt</button>
+            <button class="button" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <script>
+        function downloadReceipt() {
+            const tracking_id = "{{ tracking_id }}";
+            const sender_name = "{{ sender_name }}";
+            const receiver_name = "{{ receiver_name }}";
+            const pickup_address = "{{ pickup_address }}";
+            const delivery_address = "{{ delivery_address }}";
+            const package_description = "{{ package_description }}";
+        
+            const url = `/generate_pdf/${tracking_id}/${sender_name}/${receiver_name}/${pickup_address}/${delivery_address}/${package_description}/`;
+            window.open(url, '_blank');
+        }
+        
+        function goBack() {
+            const currentIPAddress = window.location.hostname; // Get the current IP address
+            const port = window.location.port; // Get the current port
+            const url = `http://${currentIPAddress}:${port}`; // Construct the URL
+        
+            window.location.href = url; // Redirect to the dynamic URL
+        }
+        
+        
+    </script>
+</body>
+</html>

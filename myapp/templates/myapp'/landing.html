@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swift Courier Company</title>
+  <link data-n-head="1" rel="icon" type="image/x-icon" href="https://delhivery.com/favicon.png">
+  <style>
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      line-height: 1.5;
+      font-size: 16px;
+      color: #333;
+      background-color: #f0f0f0;
+      padding: 0;
+      margin: 0;
+      background-image: url('https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 100vh;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 80%;
+      padding: 20px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      box-shadow: -4px 7px 46px 2px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      margin: 100px auto;
+    }
+
+    header {
+      margin-top: 50px;
+      color: #fff;
+    }
+
+    header h1 {
+      font-size: 36px;
+      margin: 10px 0;
+    }
+
+    header h2 {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+
+    header p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    #navbar {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    #navbar a {
+      color: #ffffff;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      margin: 0 10px;
+    }
+
+    #navbar a:hover {
+      background-color: #FF4D4D;
+    }
+
+    .signup-button,
+    .login-button {
+      padding: 15px 30px;
+      font-size: 18px;
+      text-align: center;
+      text-decoration: none;
+      color: #ffffff;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      margin: 10px;
+    }
+
+    .signup-button {
+      background-color: #ED3237;
+    }
+
+    .signup-button:hover {
+      background-color: #FF4D4D;
+    }
+
+    .login-button {
+      background-color: #0056b3;
+    }
+
+    .login-button:hover {
+      background-color: #218838;
+    }
+
+    #tracking-section {
+      background-color: rgba(87, 84, 84, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 50px;
+      color: #ffffff;
+    }
+
+    #tracking-section input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    #tracking-section button {
+      padding: 10px 20px;
+      font-size: 18px;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    #tracking-section button:hover {
+      background-color: #FF4D4D;
+    }
+
+    @media (max-width: 420px) {
+      #navbar {
+        position: static;
+        margin-top: 100px;
+
+      }
+
+      #navbar a {
+        display: inline-block;
+        margin: 10px 0;
+      }
+    }
+
+    .sub-but {
+      margin-top: 20px;
+    }
+
+    @media (max-width:380px) {
+
+      #navbar {
+        position: static;
+        margin-top: 220px;
+        text-align: center;
+      }
+
+      #navbar a {
+        display: inline-block;
+        margin: 10px 0;
+      }
+    }
+
+    .sub-but {
+      margin-top: 20px;
+    }
+
+    @media (max-width:290px) {
+      #navbar {
+        position: static;
+        margin-top: 480px;
+        text-align: center;
+      }
+
+      #navbar a {
+        display: inline-block;
+        margin: 10px 0;
+      }
+
+      .sub-but {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar">
+    <a href="login" class="login-button">Login</a>
+    <a href="signup" class="signup-button">Sign Up</a>
+    <a href="admin" class="login-button">Admin Login</a>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1>Welcome to Swift Courier </h1>
+      <h2>Simplify and Optimize Your Delivery Operations</h2>
+      <p>Delivering Excellence, One Parcel at a Time</p>
+    </header>
+
+    <section id="tracking-section">
+      <h2>Track Your Courier</h2>
+      <form id="tracking-form">
+        <p>Enter your Tracking Number:</p>
+        <input type="text" id="tracking-id" placeholder="Enter Tracking Number Here">
+        <button class="sub-but" type="submit">Track</button>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    document.getElementById('tracking-form').addEventListener('submit', function (event) {
+      event.preventDefault();  
+
+      const trackingId = document.getElementById('tracking-id').value;
+   
+      window.location.href = `/track-bookings?tracking_id=${trackingId}`;
+    });
+
+    function changeTitle() {
+      const titles = ['Welcome !!!', 'Swift Courier Company']; 
+      let index = 0;
+
+      setInterval(() => {
+        document.title = titles[index];
+        index = (index + 1) % titles.length;
+      }, 2000); 
+    }
+    changeTitle();
+  </script>
+
+</body>
+
+</html>

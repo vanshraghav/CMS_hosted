@@ -1,0 +1,25 @@
+
+{% extends "admin/base.html" %}
+{% load static %}
+
+
+
+{% block title %}Swift Courier - Admin Page{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name"><a href="{% url 'admin:index' %}">Swift Courier - Admin Login</a></h1>
+{% endblock %}
+{% block extrahead %}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/custom.css' %}">
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="/">Home</a>
+        {% if title %} &rsaquo; {{ title }}{% endif %}
+    </div>
+{% endblock %}
+
+{% block userlinks %}
+    <li><a href="{% url 'custom_logout' %}">Logout</a></li>
+{% endblock %}

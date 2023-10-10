@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Bookings</title>
+    <link data-n-head="1" rel="icon" type="image/x-icon" href="https://delhivery.com/favicon.png">
+    <style>
+        body {
+            font-family: "Open Sans", Arial, sans-serif;
+            line-height: 1.5;
+            font-size: 16px;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #000000; 
+        }
+
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            max-width: 600px;
+            width: 80%;
+            background-color: #f9f9f9; /* Card color */
+            border-radius: 10px;
+            box-shadow: -2px 10px 20px -1px rgba(237, 60, 173, 0.4);
+            padding: 40px;
+            box-sizing: border-box;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #000000;
+        }
+
+        .card p {
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .download-button {
+            padding: 10px 20px;
+            background-color: #ED3237;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .download-button:hover {
+            background-color: #FF4D4D;
+        }
+
+        .back-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-button button {
+            padding: 12px 24px;
+            background-color: #ED3237;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button button:hover {
+            background-color: #FF4D4D;
+        }
+    </style>
+</head>
+
+<body>
+    {% if message %}
+            <h3 style="align-items: center;display:flex;justify-content:center;">Oops, We didn't find any Booking</h3>
+    
+    {% else %}
+    <h1>Your Bookings</h1>
+    
+
+    <div class="cards-container">
+        
+        {% for booking in user_bookings %}
+        <div class="card">
+            <h3>Tracking ID: {{ booking.tracking_id }}</h3>
+            <h4> <strong>Current Status: {{ booking.Current_Status }}</strong> </h4>
+            <p>Sender Name: {{ booking.sender_name }}</p>
+            <p>Receiver Name: {{ booking.receiver_name }}</p>
+            <p>Pickup Address: {{ booking.pickup_address }}</p>
+            <p>Delivery Address: {{ booking.delivery_address }}</p>
+            <p>Package Description: {{ booking.package_description }}</p>
+            
+            <p>Booking Date: {{booking.booking_date}}</p>
+            <p>Expected Delivery Date: {{booking.expected_date}}</p>
+
+            <!-- Add a button to download the receipt -->
+            <a href="{% url 'generate_pdf' booking.tracking_id booking.sender_name booking.receiver_name booking.pickup_address booking.delivery_address booking.package_description %}" class="download-button" target="_blank">Download Receipt</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="back-button">
+        <button onclick="goBack()">Back</button>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>
